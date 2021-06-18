@@ -24,9 +24,7 @@
               <a class="nav-link" href="/pedirTurno">Pedi tu turno</a>
             </li>
           </ul>
-          <button class="btn btn-outline-info" type="submit">
-            Admin Login
-          </button>
+          <button class="btn btn-outline-dark">Admin Login</button>
         </div>
       </div>
     </nav>
