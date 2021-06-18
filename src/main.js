@@ -1,5 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
+import "./httpClient";
+import "./form";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
