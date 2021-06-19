@@ -24,28 +24,83 @@
               <a class="nav-link" href="/pedirTurno">Pedi tu turno</a>
             </li>
           </ul>
-          <button class="btn btn-outline-dark">Admin Login</button>
+          <button
+            v-if="$store.state.isLogged"
+            class="btn btn-outline-dark"
+            @click="logOut()"
+          >
+            Log out
+          </button>
+          <button
+            v-else
+            class="btn btn-outline-dark"
+            data-bs-toggle="modal"
+            data-bs-target="#logInModal"
+          >
+            Admin Login
+          </button>
         </div>
       </div>
     </nav>
+    <div
+      class="modal fade"
+      id="logInModal"
+      tabindex="-1"
+      aria-labelledby="logInModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="logInModalLabel">Admin Login</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <LoginForm />
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
 <script lang="js">
+import * as firebase from "firebase/app";
+import "firebase/auth";
+
+  import LoginForm from './LoginForm/LoginForm'
 
   export default  {
     name: 'src-componentes-navbar',
+    components:{LoginForm},
     props: [],
-    mounted () {
-
+    beforeCreate () {
+      firebase.default.auth().onAuthStateChanged((user) => {
+        if (user) {
+         this.$store.dispatch('logInChange', true) 
+        } else {
+         this.$store.dispatch('logInChange', false) 
+        }
+      });
     },
     data () {
       return {
-
       }
     },
     methods: {
-
+      async logOut(){
+        try{
+          const res = firebase.default.auth().signOut()
+          console.log(res)
+          this.$store.dispatch('logInChange', false)
+        } catch(err){
+          alert('Logout Error: '+ err.message)
+        }
+        
+      }
     },
     computed: {
 
