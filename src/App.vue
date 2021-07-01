@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="jumbotron">
     <Navbar />
+    <router-view />
   </div>
 </template>
 

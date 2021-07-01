@@ -5,7 +5,6 @@ import firebase from "firebase/app";
 import { router } from "./routes";
 import "./httpClient";
 import "./form";
-import "jquery";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 

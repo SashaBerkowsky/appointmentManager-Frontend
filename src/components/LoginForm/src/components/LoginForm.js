@@ -32,7 +32,9 @@ export default {
         this.$store.dispatch("logInChange", true);
         this.formData = this.getInicialData();
         this.formState._reset();
-        this.$router.go();
+        this.$router.currentRoute.path == "/"
+          ? this.$router.go()
+          : this.$router.push({ path: "/" });
       } catch (err) {
         alert(err.message);
       }

@@ -19,13 +19,27 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" v-if="isLogged">
+            <li class="nav-item">
+              <a class="nav-link" href="">Asignar turno</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">Modificar estado</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">Eliminar solicitud</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" v-else>
             <li class="nav-item">
               <a class="nav-link" href="/pedirTurno">Pedi tu turno</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">Cancela tu turno</a>
+            </li>
           </ul>
           <button
-            v-if="$store.state.isLogged"
+            v-if="isLogged"
             class="btn btn-outline-dark"
             @click="logOut()"
           >
@@ -80,11 +94,16 @@ import "firebase/auth";
     beforeCreate () {
       firebase.default.auth().onAuthStateChanged((user) => {
         if (user) {
-         this.$store.dispatch('logInChange', true) 
+          this.$store.dispatch('logInChange', true) 
         } else {
          this.$store.dispatch('logInChange', false) 
         }
-      });
+      }); 
+      
+    },
+    mounted(){
+      console.log(this.$router
+      )
     },
     data () {
       return {
@@ -96,6 +115,7 @@ import "firebase/auth";
           const res = firebase.default.auth().signOut()
           console.log(res)
           this.$store.dispatch('logInChange', false)
+          this.$router.go() 
         } catch(err){
           alert('Logout Error: '+ err.message)
         }
@@ -103,7 +123,9 @@ import "firebase/auth";
       }
     },
     computed: {
-
+      isLogged(){
+        return this.$store.state.isLogged
+      }
     }
 }
 
