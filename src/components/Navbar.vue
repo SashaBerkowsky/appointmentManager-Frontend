@@ -27,7 +27,7 @@
               <a class="nav-link" href="">Modificar estado</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">Eliminar solicitud</a>
+              <a class="nav-link" href="/cancelarTurno">Eliminar solicitud</a>
             </li>
           </ul>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0" v-else>
@@ -35,7 +35,7 @@
               <a class="nav-link" href="/pedirTurno">Pedi tu turno</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">Cancela tu turno</a>
+              <a class="nav-link" href="/cancelarTurno">Cancela tu turno</a>
             </li>
           </ul>
           <button

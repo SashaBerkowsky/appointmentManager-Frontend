@@ -10,8 +10,6 @@ export default {
       nombreLengthMax: 15,
       edadMin: 18,
       edadMax: 120,
-      urlRecursos:
-        "https://60d3a13361160900173c97f3.mockapi.io/solicitudes/solicitudes",
     };
   },
   computed: {},
@@ -30,16 +28,10 @@ export default {
       };
     },
 
-    async enviar() {
+    enviar() {
       console.log({ ...this.formData });
       if (this.formState.$valid) {
-        try {
-          await this.axios.post(this.urlRecursos, this.formData, {
-            "content-type": "application/json",
-          });
-        } catch (err) {
-          console.error("ERROR POSTEANDO SOLICITUD", err.message);
-        }
+        this.$store.dispatch("postSolicitud", this.formData);
         this.formData = this.getInicialData();
         this.formState._reset();
       } else {

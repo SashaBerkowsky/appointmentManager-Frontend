@@ -2,6 +2,7 @@
   <div class="container-fluid p-3">
     <h2>Solicitudes de vacunacion</h2>
     <hr />
+
     <table class="table">
       <thead>
         <tr>
@@ -12,6 +13,7 @@
           <th scope="col">Lugar de vacunacion</th>
           <th scope="col">Fecha de turno</th>
           <th scope="col">Estado</th>
+          <th scope="col" v-show="isLogged"></th>
         </tr>
       </thead>
       <tbody>
@@ -23,6 +25,11 @@
           <td>{{ solicitud.lugarVac }}</td>
           <td>{{ solicitud.fecha }}</td>
           <td>{{ solicitud.estado }}</td>
+          <td v-show="isLogged">
+            <button class="btn btn-danger" @click="borrarSolicitud(solicitud)">
+              Borrar
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -35,27 +42,26 @@
     name: 'src-components-listado-solicitudes',
     props: [],
     async mounted () {
-      await this.getSolicitudes()
-      console.log(this.solicitudes)
+      await this.$store.dispatch('getSolicitudes')
     },
     data () {
       return {
-        urlRecursos:"https://60d3a13361160900173c97f3.mockapi.io/solicitudes/solicitudes",
-        solicitudes:[]
+       
       }
     },
     methods: {
-      async getSolicitudes(){
-        try{
-          const respuesta = await this.axios(this.urlRecursos)
-          this.solicitudes = respuesta.data
-        } catch(err){
-          console.error('ERROR en AXIOS: ', err.message)
-        }
+      borrarSolicitud(solicitud){
+        this.$store.dispatch('deleteSolicitud', solicitud)
+        this.$store.dispatch('getSolicitudes')
       }
     },
     computed: {
-
+      solicitudes(){
+        return this.$store.state.solicitudes
+      },
+      isLogged(){
+        return this.$store.state.isLogged
+      }
     }
 }
 
