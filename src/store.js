@@ -13,8 +13,18 @@ export default new Vuex.Store({
     solicitudes: [],
     solicitudBuscada: {},
     encontreSolicitud: false,
+    solicitudesPorEstado: [],
   },
   actions: {
+    async asignarTurno({ commit }, paciente) {
+      await axios.put(`${urlRecursos}/${paciente.id}`, paciente);
+      commit("asignarTurno", paciente);
+    },
+
+    async getSolicitudesPorEstado({ commit }, estado) {
+      const res = await axios(`${urlRecursos}/?estado=${estado}`);
+      commit("getSolicitudPorEstado", res.data);
+    },
     logInChange({ commit }, value) {
       commit("changeLogInStatus", value);
     },
@@ -29,7 +39,6 @@ export default new Vuex.Store({
     },
     async postSolicitud({ commit }, value) {
       try {
-        console.log(value);
         await axios.post(urlRecursos, value, {
           "content-type": "application/json",
         });
@@ -79,6 +88,22 @@ export default new Vuex.Store({
       state.solicitudBuscada = {};
       state.encontreSolicitud = false;
       state.solicitudes.splice(idx, 1);
+    },
+    getSolicitudPorEstado(state, result) {
+      state.solicitudesPorEstado = result;
+    },
+    asignarTurno(state, valor) {
+      let encontrado = null;
+      let i = 0;
+      while (i < state.solicitudesPorEstado.length && encontrado == null) {
+        if (state.solicitudesPorEstado[i].id == valor.id) {
+          encontrado = i;
+          i++;
+        } else {
+          i++;
+        }
+      }
+      state.solicitudesPorEstado.splice(encontrado, 1);
     },
   },
 });

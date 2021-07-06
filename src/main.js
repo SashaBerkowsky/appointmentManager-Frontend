@@ -7,6 +7,8 @@ import "./httpClient";
 import "./form";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import './globalMixins'
+import './globalFilters'
 
 Vue.config.productionTip = false;
 
