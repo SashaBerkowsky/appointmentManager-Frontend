@@ -2,10 +2,9 @@
   <div class="container-fluid p-3">
     <h2>Solicitudes de vacunacion</h2>
     <hr />
-
     <table class="table">
       <thead>
-        <tr>
+        <tr class="bg-dark text-white">
           <th scope="col">Nombre</th>
           <th scope="col">Dni</th>
           <th scope="col">Edad</th>
@@ -17,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(solicitud, index) in solicitudes" :key="index">
+        <tr :class= "getColorFila(solicitud.estado)" v-for="(solicitud, index) in solicitudes" :key="index">
           <td>{{ solicitud.nombre }}</td>
           <td>{{ solicitud.dni }}</td>
           <td>{{ solicitud.edad }}</td>
@@ -46,14 +45,32 @@
     },
     data () {
       return {
-       
+
       }
     },
     methods: {
       borrarSolicitud(solicitud){
         this.$store.dispatch('deleteSolicitud', solicitud)
         this.$store.dispatch('getSolicitudes')
+      },
+      getColorFila(estado){ 
+      let colorFila
+
+      if(estado=="CONFIRMACION_PENDIENTE"){
+        colorFila="table-danger"
+      } else if (estado=="CONFIRMADO") {
+        colorFila="table-primary"
+      } else if (estado=="CONFIRMADO_PRIMERA_DOSIS"){
+        colorFila="table-warning"
+      } else if (estado=="CONFIRMADO_SEGUNDA_DOSIS") {
+        colorFila="table-info"
+      } else if (estado=="COMPLETADO") {
+        colorFila="table-success"
+      } else {
+        colorFila="table-default"
       }
+      return colorFila
+    },
     },
     computed: {
       solicitudes(){
@@ -64,8 +81,6 @@
       }
     }
 }
-
-
 </script>
 
 <style scoped lang="css">

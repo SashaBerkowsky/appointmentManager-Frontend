@@ -2,10 +2,10 @@
   <section class="src-components-asignar-turno">
    
     <div v-if="getSolcitudesPorEstado.length">
-      
+
    <div class="container-fluid mt-3">
       <h3 align="center" >Solicitudes pendientes</h3>
-      <label for="solicitud">solicitudes</label>
+      <label for="solicitud">Solicitudes</label>
       <select
         name="solicitud"
         class="form-select"
@@ -25,6 +25,8 @@
       <hr />
       
       <div v-if="estaSeleccionado">
+        
+        <h4 class="pb-1"> <u>Datos del turno</u> </h4>
         
           <label for="selectVacuna">Vacuna</label>
           <select
