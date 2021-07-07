@@ -19,12 +19,12 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0" v-if="isLogged">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" v-if="getIsLogged">
             <li class="nav-item">
               <a class="nav-link" href="/AsignarTurno">Asignar turno</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">Modificar estado</a>
+              <a class="nav-link" href="/ModificarEstado">Modificar estado</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/cancelarTurno">Eliminar solicitud</a>
@@ -39,7 +39,7 @@
             </li>
           </ul>
           <button
-            v-if="isLogged"
+            v-if="getIsLogged"
             class="btn btn-outline-dark"
             @click="logOut()"
           >
@@ -123,9 +123,6 @@ import "firebase/auth";
       }
     },
     computed: {
-      isLogged(){
-        return this.$store.state.isLogged
-      }
     }
 }
 

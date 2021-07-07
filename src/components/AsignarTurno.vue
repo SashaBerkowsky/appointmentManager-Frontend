@@ -155,7 +155,7 @@
       enviar(){
         if (this.formState.$valid && !this.vacunaSeleccionada =="") {
         this.seleccionado.tipoVacuna=this.vacunaSeleccionada
-        this.seleccionado.estado ="CONFIRMADO"
+        this.seleccionado.estado ="TURNO_CONFIRMADO"
         this.seleccionado.lugarVac=this.lugar
         this.$store.dispatch("asignarTurno", this.seleccionado)
         this.alertaIngresado()

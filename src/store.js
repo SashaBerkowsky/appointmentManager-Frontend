@@ -69,6 +69,11 @@ export default new Vuex.Store({
         console.error("ERROR ELIMINANDO SOLICITUD", err.message);
       }
     },
+    async modificarEstado({ commit }, solicitud) {
+      await axios.put(`${urlRecursos}/${solicitud.id}`, solicitud);
+      const idx = this.state.solicitudes.indexOf(solicitud);
+      commit("modificarEstado", solicitud, idx);
+    },
   },
   mutations: {
     changeLogInStatus(state, value) {
@@ -104,6 +109,9 @@ export default new Vuex.Store({
         }
       }
       state.solicitudesPorEstado.splice(encontrado, 1);
+    },
+    modificarEstado(state, valor, idx) {
+      state.solicitudes[idx] = valor
     },
   },
 });

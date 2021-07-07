@@ -12,19 +12,19 @@
           <th scope="col">Lugar de vacunacion</th>
           <th scope="col">Fecha de turno</th>
           <th scope="col">Estado</th>
-          <th scope="col" v-show="isLogged"></th>
+          <th scope="col" v-show="getIsLogged"></th>
         </tr>
       </thead>
       <tbody>
-        <tr :class= "getColorFila(solicitud.estado)" v-for="(solicitud, index) in solicitudes" :key="index">
+        <tr :class= "getColorFila(solicitud.estado)" v-for="(solicitud, index) in getSolicitudes" :key="index">
           <td>{{ solicitud.nombre }}</td>
           <td>{{ solicitud.dni }}</td>
           <td>{{ solicitud.edad }}</td>
           <td>{{ solicitud.tipoVacuna }}</td>
           <td>{{ solicitud.lugarVac }}</td>
           <td>{{ solicitud.fecha }}</td>
-          <td>{{ solicitud.estado }}</td>
-          <td v-show="isLogged">
+          <td>{{ solicitud.estado | formateoEstado }}</td>
+          <td v-show="getIsLogged">
             <button class="btn btn-danger" @click="borrarSolicitud(solicitud)">
               Borrar
             </button>
@@ -58,13 +58,11 @@
 
       if(estado=="CONFIRMACION_PENDIENTE"){
         colorFila="table-danger"
-      } else if (estado=="CONFIRMADO") {
+      } else if (estado=="TURNO_CONFIRMADO") {
         colorFila="table-primary"
       } else if (estado=="CONFIRMADO_PRIMERA_DOSIS"){
         colorFila="table-warning"
       } else if (estado=="CONFIRMADO_SEGUNDA_DOSIS") {
-        colorFila="table-info"
-      } else if (estado=="COMPLETADO") {
         colorFila="table-success"
       } else {
         colorFila="table-default"
@@ -73,12 +71,6 @@
     },
     },
     computed: {
-      solicitudes(){
-        return this.$store.state.solicitudes
-      },
-      isLogged(){
-        return this.$store.state.isLogged
-      }
     }
 }
 </script>

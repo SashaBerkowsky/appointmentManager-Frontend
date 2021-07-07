@@ -7,6 +7,9 @@ var miMixinGlobal = {
         },
         getSolcitudesPorEstado(){
             return this.$store.state.solicitudesPorEstado
+        },
+        getSolicitudes() {
+            return this.$store.state.solicitudes
         }
     }
 }

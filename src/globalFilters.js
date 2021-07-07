@@ -1,7 +1,24 @@
-import Vue from 'vue'
+import Vue from "vue";
 
-Vue.filter('formteoFecha', function(value) {
-    console.log(value)
-   let result= value.split("-")
-   return `${result[2]}/${result[1]}/${result[0]}`
-})  
+Vue.filter("formteoFecha", function(value) {
+  let result = value.split("-");
+  return `${result[2]}/${result[1]}/${result[0]}`;
+});
+Vue.filter("formateoEstado", function(value) {
+  let result;
+  switch (value) {
+    case "CONFIRMACION_PENDIENTE":
+      result = "Turno pendiente";
+      break;
+    case "CONFIRMADO_PRIMERA_DOSIS":
+      result = "Primera dosis aplicada";
+      break;
+    case "TURNO_CONFIRMADO":
+      result = "Turno confirmado";
+      break;
+    case "CONFIRMADO_SEGUNDA_DOSIS":
+      result = "Segunda dosis aplicada";
+      break;
+  }
+  return result;
+});
