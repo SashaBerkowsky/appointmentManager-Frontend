@@ -28,7 +28,7 @@
           <td>{{ solicitud.edad }}</td>
           <td>{{ solicitud.tipoVacuna }}</td>
           <td>{{ solicitud.lugarVac }}</td>
-          <td>{{ solicitud.fecha }}</td>
+          <td>{{ solicitud.fecha | formteoFecha}}</td>
           <td>{{ solicitud.estado | formateoEstado }}</td>
           <td v-show="getIsLogged">
             <button class="btn btn-danger" @click="borrarSolicitud(solicitud)">

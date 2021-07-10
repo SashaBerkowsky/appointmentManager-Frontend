@@ -26,7 +26,7 @@
           <td>{{ solicitud.edad }}</td>
           <td>{{ solicitud.tipoVacuna }}</td>
           <td>{{ solicitud.lugarVac }}</td>
-          <td>{{ solicitud.fecha }}</td>
+          <td>{{ solicitud.fecha | formteoFecha }}</td>
           <td>{{ solicitud.estado | formateoEstado }}</td>
 
           <td v-show="getIsLogged">
@@ -46,6 +46,8 @@
 
 <script lang="js">
 
+  import moment from "moment";
+
   export default  {
     name: 'src-components-listado-solicitudes',
     props: [],
@@ -58,14 +60,21 @@
       }
     },
     methods: {
+
+      modificarFecha(fecha){
+        const cant = 30
+      const fechaMoment = moment(fecha);
+      const result = fechaMoment.add(cant, "days").format("YYYY-MM-DD");
+
+      return result
+    },
+
       modificarEstado(solicitud){
         solicitud.estado = this.estadoSiguiente(solicitud.estado)
-        solicitud.fecha = this.modificarFecha(solicitud.fecha)
+        solicitud.fecha =  solicitud.estado==="CONFIRMADO_PRIMERA_DOSIS"? this.modificarFecha(solicitud.fecha):""
         this.$store.dispatch('modificarEstado', solicitud)
       },
-      modificarFecha(fecha){
-        return fecha
-      },
+  
       esAvanzable(estado){
         return estado === "CONFIRMADO_SEGUNDA_DOSIS"||estado==='CONFIRMACION_PENDIENTE'
       },

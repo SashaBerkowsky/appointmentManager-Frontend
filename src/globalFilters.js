@@ -1,8 +1,12 @@
 import Vue from "vue";
 
 Vue.filter("formteoFecha", function(value) {
+  const dateFormat = /^(\d{4})-(\d{2})-(\d{2})$/;
+  if (dateFormat.test(value)) {
   let result = value.split("-");
   return `${result[2]}/${result[1]}/${result[0]}`;
+  }
+  return value
 });
 Vue.filter("formateoEstado", function(value) {
   let result;
