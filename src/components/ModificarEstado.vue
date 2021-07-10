@@ -28,10 +28,14 @@
           <td>{{ solicitud.lugarVac }}</td>
           <td>{{ solicitud.fecha }}</td>
           <td>{{ solicitud.estado | formateoEstado }}</td>
-          
+
           <td v-show="getIsLogged">
-            <button :disabled="esUltEstado(solicitud.estado)" class="btn btn-success" @click="modificarEstado(solicitud)" >
-              Modificiar Estado
+            <button
+              :disabled="esAvanzable(solicitud.estado)"
+              class="btn btn-success"
+              @click="modificarEstado(solicitud)"
+            >
+              Modificar Estado
             </button>
           </td>
         </tr>
@@ -56,17 +60,18 @@
     methods: {
       modificarEstado(solicitud){
         solicitud.estado = this.estadoSiguiente(solicitud.estado)
+        solicitud.fecha = this.modificarFecha(solicitud.fecha)
         this.$store.dispatch('modificarEstado', solicitud)
       },
-      esUltEstado(estado){
-        return estado === "CONFIRMADO_SEGUNDA_DOSIS"
+      modificarFecha(fecha){
+        return fecha
+      },
+      esAvanzable(estado){
+        return estado === "CONFIRMADO_SEGUNDA_DOSIS"||estado==='CONFIRMACION_PENDIENTE'
       },
       estadoSiguiente(estado){
           let result;
           switch (estado) {
-            case "CONFIRMACION_PENDIENTE":
-              result = "TURNO_CONFIRMADO";
-              break;
               case "TURNO_CONFIRMADO":
                 result = "CONFIRMADO_PRIMERA_DOSIS";
                 break;

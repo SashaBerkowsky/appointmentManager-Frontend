@@ -5,7 +5,7 @@
       style="background-color: #e3f2fd"
     >
       <div class="container-fluid">
-        <a class="navbar-brand" href="/">Vacunatorio</a>
+        <router-link class="navbar-brand" to="/">Vacunatorio</router-link>
 
         <button
           class="navbar-toggler"
@@ -21,21 +21,31 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0" v-if="getIsLogged">
             <li class="nav-item">
-              <a class="nav-link" href="/AsignarTurno">Asignar turno</a>
+              <router-link class="nav-link" to="/AsignarTurno"
+                >Asignar turno</router-link
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/ModificarEstado">Modificar estado</a>
+              <router-link class="nav-link" to="/ModificarEstado"
+                >Modificar estado</router-link
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/cancelarTurno">Eliminar solicitud</a>
+              <router-link class="nav-link" to="/cancelarTurno"
+                >Eliminar solicitud</router-link
+              >
             </li>
           </ul>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0" v-else>
             <li class="nav-item">
-              <a class="nav-link" href="/pedirTurno">Pedi tu turno</a>
+              <router-link class="nav-link" to="/pedirTurno"
+                >Pedi tu turno</router-link
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/cancelarTurno">Cancela tu turno</a>
+              <router-link class="nav-link" to="/cancelarTurno"
+                >Cancela tu turno</router-link
+              >
             </li>
           </ul>
           <button
@@ -82,8 +92,8 @@
 </template>
 
 <script lang="js">
-import * as firebase from "firebase/app";
-import "firebase/auth";
+  import * as firebase from "firebase/app";
+  import "firebase/auth";
 
   import LoginForm from './LoginForm/LoginForm'
 

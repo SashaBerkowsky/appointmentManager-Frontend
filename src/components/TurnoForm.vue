@@ -7,11 +7,11 @@
       v-model="vacunaSeleccionada"
       :required="true"
     >
-      <option value="" disabled :selected="vacunaSeleccionada"
-        >Seleccione una vacuna</option
-      >
-      <option v-for="(vacuna, index) in vacunas" :key="index" :value="vacuna"
-        >{{ vacuna }}
+      <option value="" disabled :selected="vacunaSeleccionada">
+        Seleccione una vacuna
+      </option>
+      <option v-for="(vacuna, index) in vacunas" :key="index" :value="vacuna">
+        {{ vacuna }}
       </option>
     </select>
     <br />
@@ -65,9 +65,7 @@
         </field-messages>
       </validate>
       <br />
-      <button class="btn btn-dark mt-3 me-3 mb-3" type="submit">
-        Enviar
-      </button>
+      <button class="btn btn-dark mt-3 me-3 mb-3" type="submit">Enviar</button>
     </vue-form>
   </section>
 </template>
@@ -108,7 +106,7 @@ formReset(){
         this.datos = this.getSeleccionado  
         this.datos.fecha=this.fecha
         this.datos.tipoVacuna=this.vacunaSeleccionada
-        this.datos.estado ="CONFIRMADO"
+        this.datos.estado ="TURNO_CONFIRMADO"
         this.datos.lugarVac=this.lugar
         this.$store.dispatch("asignarTurno",this.datos)
         /* this.alertaIngresado() */
