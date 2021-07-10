@@ -74,7 +74,7 @@
 
   export default  {
     name: 'src-components-turno-form',
-    props: ["seleccionado","method"],
+    props: ["seleccionado"],
     
     mounted () {
         this.datos=this.seleccionado
@@ -109,8 +109,7 @@ formReset(){
         this.datos.estado ="TURNO_CONFIRMADO"
         this.datos.lugarVac=this.lugar
         this.$store.dispatch("asignarTurno",this.datos)
-        /* this.alertaIngresado() */
-        this.method()
+        this.$emit('resetSeleccionado', {})
         this.formReset()
         }else{
           console.log("campos erroneos"

@@ -10,20 +10,24 @@
           v-model="seleccionado"
           :required="true"
         >
-          <option :value="{}" disabled :selected="seleccionado"
-            >Seleccione una solicitud</option
-          >
+          <option :value="{}" disabled :selected="seleccionado">
+            Seleccione una solicitud
+          </option>
           <option
             v-for="(solicitud, index) in getSolcitudesPorEstado"
             :key="index"
             :value="solicitud"
-            >{{ solicitud.nombre }}
+          >
+            {{ solicitud.nombre }}
           </option>
         </select>
         <hr />
-          <div v-if="estaSeleccionado">
-         <TurnoForm :seleccionado="seleccionado" :method="formatearSeleccionado"/>
-          </div>
+        <div v-if="estaSeleccionado">
+          <TurnoForm
+            :seleccionado="seleccionado"
+            @resetSeleccionado="resetSeleccionado($event)"
+          />
+        </div>
       </div>
     </div>
     <div v-else class="alert alert-warning mt-2">
@@ -55,14 +59,15 @@
 
     },
     methods: {
-    formatearSeleccionado(){
-      this.seleccionado={}
-    },
+     resetSeleccionado(select){
+        this.seleccionado= select
+      }
     },
     computed: {
       estaSeleccionado(){
        return this.seleccionado?.nombre
         },
+     
     }
 }
 </script>
