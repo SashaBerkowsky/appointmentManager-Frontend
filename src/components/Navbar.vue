@@ -111,10 +111,6 @@
       }); 
       
     },
-    mounted(){
-      console.log(this.$router
-      )
-    },
     data () {
       return {
       }
@@ -122,14 +118,12 @@
     methods: {
       async logOut(){
         try{
-          const res = firebase.default.auth().signOut()
-          console.log(res)
+          firebase.default.auth().signOut()
           this.$store.dispatch('logInChange', false)
           this.$router.go() 
         } catch(err){
           alert('Logout Error: '+ err.message)
         }
-        
       }
     },
     computed: {
