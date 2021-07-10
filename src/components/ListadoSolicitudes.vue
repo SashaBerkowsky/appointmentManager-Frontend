@@ -5,6 +5,7 @@
     <table class="table">
       <thead>
         <tr class="bg-dark text-white">
+          <th scope="col">ID</th>
           <th scope="col">Nombre</th>
           <th scope="col">Dni</th>
           <th scope="col">Edad</th>
@@ -16,7 +17,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr :class= "getColorFila(solicitud.estado)" v-for="(solicitud, index) in getSolicitudes" :key="index">
+        <tr
+          :class="getColorFila(solicitud.estado)"
+          v-for="(solicitud, index) in getSolicitudes"
+          :key="index"
+        >
+          <td>{{ solicitud.id }}</td>
           <td>{{ solicitud.nombre }}</td>
           <td>{{ solicitud.dni }}</td>
           <td>{{ solicitud.edad }}</td>

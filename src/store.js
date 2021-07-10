@@ -61,9 +61,8 @@ export default new Vuex.Store({
     },
     async deleteSolicitud({ commit }, value) {
       try {
-        console.log(value.id);
         await axios.delete(`${urlRecursos}/${value.id}`);
-        const idx = this.state.solicitudes.indexOf(value);
+        const idx = this.state.solicitudes.findIndex((x) => x.id === value.id);
         commit("deleteSolicitud", idx);
       } catch (err) {
         console.error("ERROR ELIMINANDO SOLICITUD", err.message);
@@ -111,7 +110,7 @@ export default new Vuex.Store({
       state.solicitudesPorEstado.splice(encontrado, 1);
     },
     modificarEstado(state, valor, idx) {
-      state.solicitudes[idx] = valor
+      state.solicitudes[idx] = valor;
     },
   },
 });

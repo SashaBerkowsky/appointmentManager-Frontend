@@ -29,7 +29,6 @@ export default {
     },
 
     enviar() {
-      console.log({ ...this.formData });
       if (this.formState.$valid) {
         this.$store.dispatch("postSolicitud", this.formData);
         this.formData = this.getInicialData();
