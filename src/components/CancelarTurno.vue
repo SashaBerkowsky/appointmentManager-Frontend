@@ -32,9 +32,10 @@
 
         <button class="btn btn-dark mt-3 me-3" type="submit">Enviar</button>
       </vue-form>
+      <br>
       <table class="table" v-if="encontreSolicitud">
         <thead>
-          <tr>
+          <tr class="bg-dark text-white">
             <th scope="col">Nombre</th>
             <th scope="col">Dni</th>
             <th scope="col">Edad</th>
@@ -52,8 +53,8 @@
             <td>{{ solicitudBuscada.edad }}</td>
             <td>{{ solicitudBuscada.tipoVacuna }}</td>
             <td>{{ solicitudBuscada.lugarVac }}</td>
-            <td>{{ solicitudBuscada.fecha }}</td>
-            <td>{{ solicitudBuscada.estado }}</td>
+            <td>{{ solicitudBuscada.fecha | formteoFecha }}</td>
+            <td>{{  solicitudBuscada.estado | formateoEstado }}</td>
             <td>
               <button class="btn btn-danger" @click="borrarSolicitud()">
                 Borrar
