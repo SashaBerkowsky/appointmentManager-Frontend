@@ -1,4 +1,4 @@
-# vacunatorio-nt2
+# appointmentManager-Frontend
 
 ## Project setup
 ```
